@@ -4,7 +4,7 @@ public class Main {
 	
 /*
  * Crear un programa que solicite una matriz de orden 3x3.
- * Una  función  determina  si  es  simétrica
+ * Write a function that determines whether the matrix is symmetric
  */
 
 	public static void main(String[] args) {
