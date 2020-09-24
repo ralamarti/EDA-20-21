@@ -1,5 +1,7 @@
 package main;
 
+import tools.Punto;
+
 public class Main {
 
 /*
@@ -10,7 +12,9 @@ public class Main {
  */
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		Punto miPunto = new Punto(2, 7, 4);
+		Punto miSegundoPunto = new Punto(8, 9, 3);
 
 	}
 
