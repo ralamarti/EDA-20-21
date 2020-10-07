@@ -19,54 +19,57 @@ public class Main {
 		
 		Scanner entrada = new Scanner(System.in);
 		
-		// Bucle para recorrer matriz
-		for(int filas = 0; filas < dimension; filas++) { //Recorrer las filas
+		// Bucle para recorrer una matriz
+		for(int filas = 0; filas < dimension; filas++) {
 			
-			for(int columnas = 0; columnas < dimension; columnas++) { //Recorrer columna
+			for(int columnas = 0; columnas < dimension; columnas++) {
 				
-				// Meter los valores en cada posición
-				System.out.println("Give me an int for position [" + filas + "][" + columnas +"]");
-				
+				// Pedir entrada al usuario
+				System.out.println("Give me the value for position [" + filas + "][" + columnas + "]");
+				// Recuperar desde teclado
 				matrix[filas][columnas] = entrada.nextInt();
-				
 			}
 			
 		}
 		
-		System.out.println("Give me a row to swap");
-		int fila = entrada.nextInt();
+		// Pedimos dos filas para intercambiar
+		System.out.println("Give me the first row to swap");
+		int firstRow = entrada.nextInt();
+		System.out.println("Give me the second row to swap");
+		int secondRow = entrada.nextInt();
 		
-		System.out.println("Give me a second row to swap");
-		int segundaFila = entrada.nextInt();
+		// Intercambio de arrays
+		int[] filaAuxiliar = matrix[firstRow];
+		matrix[firstRow] = matrix[secondRow];
+		matrix[secondRow] = filaAuxiliar;
 		
-		int[] filaAuxiliar = matrix[fila];
-		/*
-		 * for(int i = 0; i < dimension; i++) 
-		 * 		filaAuxiliar[i] = matrix[fila][i]; 
-		 */
 		
-		// Intercambio de las filas
-		matrix[fila] = matrix[segundaFila];
-		matrix[segundaFila] = filaAuxiliar;
+		/* Bucle para intercambiar valores
+		int[] filaAuxiliar = new int[dimension];
+		for(int i = 0; i < dimension; i++) {
+			filaAuxiliar[i] = matrix[firstRow][i];
+			matrix[firstRow][i] = matrix[secondRow][i];
+			matrix[secondRow][i] = filaAuxiliar[i];
+		}
+		*/
 		
-		// Imprimir matrix
-		for(int filas = 0; filas < dimension; filas++) { //Recorrer las filas
-			// imprimir [
-			for(int columnas = 0; columnas < dimension; columnas++) { //Recorrer columna
-				
-				// Meter los valores en cada posición
-				//System.out.println("position [" + filas + "][" + columnas + "] = " + matrix[filas][columnas]);
+		
+		// Bucle para escribir matriz por consola
+		for(int filas = 0; filas < dimension; filas++) 
+		{
+			for(int columnas = 0; columnas < dimension; columnas++)
+			{
+				// Pedir entrada al usuario
+				//System.out.println("Value for position [" + filas + "][" + columnas + "] = " + matrix[filas][columnas]);
+		
 				System.out.print(matrix[filas][columnas] + "\t");
-				
 			}
-			
 			System.out.println();
-			// imprimir ]
-			
 		}
 		
 		entrada.close();
-		
+				
 	}
 
 }
+

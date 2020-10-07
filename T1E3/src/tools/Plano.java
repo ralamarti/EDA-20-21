@@ -2,18 +2,8 @@ package tools;
 
 public class Plano {
 
-	Punto primerPunto;
-	Punto segundoPunto;
+	Punto p = new Punto(3,6);
 	
-	public Plano(Punto primerPunto, Punto segundoPunto) {
-		this.primerPunto = primerPunto;
-		this.segundoPunto = segundoPunto;
+	public Plano() {
 	}
-	
-	public int distanciaEntrePuntos() {
-		return 0;
-		
-	}
-	
-	
 }

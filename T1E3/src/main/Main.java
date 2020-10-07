@@ -12,10 +12,9 @@ public class Main {
  */
 
 	public static void main(String[] args) {
-		
-		Punto miPunto = new Punto(2, 7, 4);
-		Punto miSegundoPunto = new Punto(8, 9, 3);
-
+				
+		Punto miPunto = new Punto(3,7);
+		Punto miSegundoPunto = new Punto(9,2);
 	}
 
 }
