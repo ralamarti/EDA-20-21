@@ -39,10 +39,10 @@ public class Lista {
 		
 	/*
 	 * Bonus
-	 * printList() : imprime la lista por pantalla
+	 * printList(): imprime la lista por pantalla
+	 * size(): devuelve el tamaño de la lista
 	 */
-	public void printList() {
-		
-	}
+
+	
 	
 }
