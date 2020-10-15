@@ -16,13 +16,14 @@ public class Principal {
 		Lista listaCompra = new Lista();
 		
 		// Crear los productos
-		Producto ambientador = new Producto(14980, "ambientador", "limpieza", 3.55);
-		Granel pollo = new Granel(15400, "pollo", "comida", 6.75, 3.5);
-		Unidades manzana = new Unidades(14, "manzana", "comida", 3.5, 15);
+		Producto cerveza = new Producto(15167, "cerveza", 2);
+		Granel conguitos = new Granel(16754, "conguitos", 4, 1.2);
+		Unidad pan = new Unidad(4, "pan", 0.8, 2);
 		
-		listaCompra.insertHead(ambientador);
-		listaCompra.insertHead(pollo);
-		listaCompra.insertHead(manzana);
+		listaCompra.insertHead(pan);		
+		listaCompra.insertHead(conguitos);
+		listaCompra.insertHead(cerveza);
+		
 
 		
 	}
