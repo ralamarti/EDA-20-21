@@ -1,14 +1,26 @@
-package listaTools;
+package tools;
+
 public class Lista {
 
 	public NodoLista primero;
-
+	
+	// Constructores
+	
+	/**
+	 * Constructor de lista vacía
+	 */
 	public Lista() {
-		// TODO
+		primero = null;
 	}
-
-
-
+	
+	/**
+	 * Constructor con un elemento
+	 * @param primero
+	 */
+	public Lista(NodoLista primero) {
+		this.primero = primero;
+	}
+	
 	/*
 	 * Operaciones del TAD
 	 * isEmpty(): Determina si la lista es vacía
@@ -23,26 +35,29 @@ public class Lista {
 	 * clear(): Vacía la lista
 	 * */
 	
-	public Lista insertHead(Object o) {
+	public boolean isEmpty() {
+		if (primero.equals(null))return true;
+		else return false;
 		
-		// Crea un nuevo nodo
-		NodoLista nuevoNodo = new NodoLista(o);
-
-		// Enlaza el nuevo nodo al frente de la lista
-		nuevoNodo.siguienteNodo = primero;
-		primero = nuevoNodo;
-
-		// Devuelve esta lista
-		return this;
-
 	}
-		
+	
+	public void clear() {
+		primero = null;
+	}
+	
+	//insertHead(x): Inserta el elemento x al principio de la lista, será el nuevo primer elemento.
+	
+	public Lista insertHead(Object dato) {
+		NodoLista nodo = new NodoLista(dato, primero);
+		primero = nodo;
+		return this;
+	}
+	
+	
+	
 	/*
 	 * Bonus
 	 * printList(): imprime la lista por pantalla
 	 * size(): devuelve el tamaño de la lista
 	 */
-
-	
-	
 }
