@@ -121,33 +121,29 @@ public class Lista {
 		 */
 
 		//TODO: resolver position negativa, position 0, position > tamaño de lista
-
-		if (position == 0) {
+		if (position < 0 || position > size()) {
+			System.out.println("Error, out of bounds");
+		}
+		else if (position == 0) {
 			insertHead(dato);
 		}
-		else if(position < 0 || position >= size()) {
-			System.out.println("Valor erroneo");
-		}
-		else{
-
-
-
+		else {
+		
 			// Creamos las variables auxiliares
 			NodoLista aux = this.primero;
-
+	
 			// Iteramos hasta llegar a la posición anterior
 			for (int i = 0; i < position-1; i++) {
 				aux = aux.enlace;
 			}
-
+	
 			// Guardamos el siguiente para poder usarlo como enlace
 			NodoLista siguiente = aux.enlace;
-
+	
 			// Actualizamos el enlace
 			aux.enlace = new NodoLista(dato, siguiente);
 
 		}
-
 		return this;
 	}
 	
