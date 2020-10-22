@@ -26,7 +26,7 @@ public class Lista {
 	 * X isEmpty(): Determina si la lista es vacía
 	 * X insertHead(x): Inserta el elemento x al principio de la lista, será el nuevo primer elemento.
 	 * X insertLast(x): Inserta el elemento x al final de la lista, será el último elemento.
-	 * X insertAtPosition(n,x): Inserta el  elemento x en la posición n
+	 * X insertAtPosition(n,x): Inserta el elemento x en la posición n
 	 * insertAfter(n,x): Inserta el elemento x en la posición n+1
 	 * find(x): Devuelve la posición del elemento x
 	 * remove(x): Elimina el elemento x
@@ -34,6 +34,7 @@ public class Lista {
 	 * X first(): Devuelve el primer elemento de la lista 
 	 * X last(): Devuelve el último elemento de la lista
 	 * X clear(): Vacía la lista
+	 * X size(): Devuelve el tamaño de la lista
 	 * */
 	
 	public boolean isEmpty() {
@@ -93,7 +94,7 @@ public class Lista {
 	
 	
 	public Lista insertAtPosition(Object dato, int position) {
-		
+
 		/*
 		 * 1 --> 2 --> 3 --> null
 		 * 0	 1	   2
@@ -101,14 +102,14 @@ public class Lista {
 		 * Resultado:
 		 * 1 --> 2 --> nuevo --> 3 --> null
 		 */
-		
+
 		/* Algoritmo erróneo
 		 * 1 (aux) --> 2 --> 3 --> null
 		 * Bucle hasta posición donde queremos meter el nuevo (pos 2)
 		 * 1 --> 2 --> 3 (aux) --> null
-	   	 *            nuevo (aux) --> 3 --> null
+		 *            nuevo (aux) --> 3 --> null
 		 */
-		
+
 		/* Algoritmo
 		 * 1 (aux) --> 2 --> 3 --> null
 		 * Bucle hasta posición anterior hasta donde queremos meter el nuevo (pos 1)
@@ -118,26 +119,55 @@ public class Lista {
 		 * Queremos que 2 apunte a nuevo y que nuevo apunte a 3
 		 * 1 --> 2 (aux) --> nuevo (aux.enlace) --> 3 (siguiente) --> null
 		 */
-		
+
 		//TODO: resolver position negativa, position 0, position > tamaño de lista
-		
-		// Creamos las variables auxiliares
-		NodoLista aux = this.primero;
-		
-		// Iteramos hasta llegar a la posición anterior
-		for (int i = 0; i < position-1; i++) {
-			aux = aux.enlace;
+
+		if (position == 0) {
+			insertHead(dato);
 		}
-		
-		// Guardamos el siguiente para poder usarlo como enlace
-		NodoLista siguiente = aux.enlace;
-		
-		// Actualizamos el enlace
-		aux.enlace = new NodoLista(dato, siguiente);
-		
+		else if(position < 0 || position >= size()) {
+			System.out.println("Valor erroneo");
+		}
+		else{
+
+
+
+			// Creamos las variables auxiliares
+			NodoLista aux = this.primero;
+
+			// Iteramos hasta llegar a la posición anterior
+			for (int i = 0; i < position-1; i++) {
+				aux = aux.enlace;
+			}
+
+			// Guardamos el siguiente para poder usarlo como enlace
+			NodoLista siguiente = aux.enlace;
+
+			// Actualizamos el enlace
+			aux.enlace = new NodoLista(dato, siguiente);
+
+		}
+
 		return this;
 	}
 	
+	public int size() {
+		
+		if (isEmpty()) {
+			return 0;	
+		}
+		else {
+			int size = 1;
+			NodoLista last  = this.primero;
+			while(last.enlace != null){
+				size++;
+				last = last.enlace;
+			}
+			return size;
+		}
+	}
+
+
 	public NodoLista last() {
 		
 		// Entro a través del primero
