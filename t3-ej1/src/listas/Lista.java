@@ -1,4 +1,6 @@
-package tools;
+package listas;
+
+import nodos.NodoLista;
 
 public class Lista {
 
@@ -22,7 +24,7 @@ public class Lista {
 	}
 	
 	/*
-	 * Operaciones del TAD
+	 * Operaciones del TAD Lista
 	 * X isEmpty(): Determina si la lista es vacía
 	 * X insertHead(x): Inserta el elemento x al principio de la lista, será el nuevo primer elemento.
 	 * X insertLast(x): Inserta el elemento x al final de la lista, será el último elemento.

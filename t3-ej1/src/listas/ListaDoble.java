@@ -1,4 +1,6 @@
-package tools;
+package listas;
+
+import nodos.NodoDoble;
 
 public class ListaDoble {
 	

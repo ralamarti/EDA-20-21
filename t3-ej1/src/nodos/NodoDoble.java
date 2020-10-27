@@ -1,4 +1,4 @@
-package tools;
+package nodos;
 
 public class NodoDoble {
 	

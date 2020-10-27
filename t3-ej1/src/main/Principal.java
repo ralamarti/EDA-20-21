@@ -1,7 +1,7 @@
 package main;
 
 import clases.*;
-import tools.Lista;
+import listas.Lista;
 
 public class Principal {
 

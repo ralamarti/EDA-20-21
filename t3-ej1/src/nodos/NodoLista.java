@@ -1,9 +1,9 @@
-package tools;
+package nodos;
 
 public class NodoLista {
 
 	Object dato;
-	NodoLista enlace;
+	public NodoLista enlace;
 	
 	//Constructores 
 	public NodoLista (Object x) {		
