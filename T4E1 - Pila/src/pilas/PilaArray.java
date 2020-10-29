@@ -8,7 +8,7 @@ public class PilaArray {
 	
 	/*
 	 * X PilaArray(): Inicializa una pila vacía
-	 * push(x): Inserta un elemento en la pila
+	 * X push(x): Inserta un elemento en la pila
 	 * pop(): Extrae un elemento de la pila
 	 * X isEmpty(): Comprobación si la pila está vacía
 	 * X isFull(): Comprobación si la pila está llena
@@ -53,5 +53,14 @@ public class PilaArray {
 		
 	}
 	
+	public int pop() {
+		int valor = peek();
+		cima--;
+		return valor;
+	}
+	
+	public void clear() {
+		cima = -1;
+	}
 	
 }
