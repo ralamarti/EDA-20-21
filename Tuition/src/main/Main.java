@@ -1,13 +1,13 @@
 package main;
 
-
-import listas.Lista;
-import listas.Nodo;
+import clases.Libro;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
+
+		Libro eragon = new Libro();		
+
 	}
 
 }

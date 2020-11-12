@@ -1,18 +1,18 @@
 package pilas;
 
 public class PilaArray {
-
+	
+	public int cima;
 	public int size;
 	public int[] datos;
-	public int cima;
 	
 	/*
 	 * X PilaArray(): Inicializa una pila vacía
-	 * X push(x): Inserta un elemento en la pila
+	 * x push(x): Inserta un elemento en la pila
 	 * pop(): Extrae un elemento de la pila
 	 * X isEmpty(): Comprobación si la pila está vacía
 	 * X isFull(): Comprobación si la pila está llena
-	 * clear(): Vacía la pila
+	 * X clear(): Vacía la pila
 	 * X peek(): Valor cima de la pila (sin extracción)
 	 * X size(): Número de elementos en la pila
 	 * X capacity(): Tamaño máximo de la pila
@@ -20,47 +20,66 @@ public class PilaArray {
 	
 	public PilaArray(int size) {
 		this.size = size;
-		this.datos = new int[size];
 		this.cima = -1;
+		this.datos = new int[size];
 	}
+	
+	// isEmpty(): Comprobación si la pila está vacía
 	
 	public boolean isEmpty() {
-		return cima == -1;
+		return this.cima==-1;
 	}
 	
+	// isFull(): Comprobación si la pila está llena
+	
 	public boolean isFull() {
-		return cima == this.size-1;
+		return this.cima==this.size-1;
 	}
+	
+	// size(): Número de elementos en la pila
+	
+	public int size() {
+		return this.cima+1;
+	}
+	
+	// capacity(): Tamaño máximo de la pila
 	
 	public int capacity() {
 		return this.size;
 	}
-	public int size() {
-		return this.cima+1;
-	}
-	public int peek() {
-		return this.datos[cima];
-	}
 	
-	public void push(int nuevoDato) {
-		
-		if(!this.isFull()) {
-			this.datos[cima+1] = nuevoDato;
-			cima++;
-		} else {
-			System.out.println("Stack overflow");
-		}
-		
-	}
-	
-	public int pop() {
-		int valor = peek();
-		cima--;
-		return valor;
-	}
+	// clear(): Vacía la pila
 	
 	public void clear() {
-		cima = -1;
+		
+		this.cima = -1;
 	}
+	
+	// peek(): Valor cima de la pila (sin extracción)
+	
+	public void peek()
+	{
+		if (!isEmpty()) {
+			System.out.println("Data is " + this.datos[this.cima]);
+		} else System.out.println("Cannot return value (stack is empty)");
+	}
+	
+	// push(x): Inserta un elemento en la pila
+	public void push(int dato) {
+		if(!isFull()) {
+			this.cima++;
+			this.datos[this.cima]=dato;
+		}else System.out.println("esta llena la pila");
+	}
+	
+	//pop(): Extrae un elemento de la pila
+	public void pop() {
+		if(!isEmpty()) {
+			System.out.println("Data is " + this.datos[this.cima]);
+			this.cima--;
+		}else System.out.println("esta vacia la pila");
+	}
+	
+	
 	
 }

@@ -39,6 +39,10 @@ public class Lista {
 	 * X size(): Devuelve el tamaño de la lista
 	 * */
 	
+	/**
+	 * Método que comprueba si la lista está vacía
+	 * @return true si la lista está vacía, false si la lista tiene elementos
+	 */
 	public boolean isEmpty() {
 		if (primero.equals(null))return true;
 		else return false;
