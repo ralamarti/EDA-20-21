@@ -8,20 +8,14 @@ public class Main {
 		try {
 
 
-			ListaDoble miLista = new ListaDoble();
-
-			miLista.insertLast(5);
-			miLista.insertLast(2);
-			miLista.insertLast(13);
-
-			miLista.clear();
+			ListaDobleCircular miLista = new ListaDobleCircular();
 
 			int size = miLista.size();
-			miLista.insertHead(5);
+			miLista.insert(5);
 			size = miLista.size();
-			miLista.insertHead(2);
+			miLista.insert(2);
 			size = miLista.size();
-			miLista.insertHead(13);
+			miLista.insert(13);
 			size = miLista.size();
 			
 			miLista.insertAfter(9, 2);			

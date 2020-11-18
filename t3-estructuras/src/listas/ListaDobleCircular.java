@@ -129,6 +129,7 @@ public class ListaDobleCircular {
 			NodoDoble nuevo = new NodoDoble(nodoReferencia, dato, nodoReferencia.siguiente);
 			nodoReferencia.siguiente.anterior = nuevo;
 			nodoReferencia.siguiente = nuevo;
+			acceso = nuevo;
 
 		}
 	}
