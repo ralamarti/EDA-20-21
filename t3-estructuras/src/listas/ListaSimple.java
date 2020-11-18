@@ -1,4 +1,4 @@
-package listaSimple;
+package listas;
 
 import nodos.Nodo;
 

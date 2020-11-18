@@ -1,4 +1,4 @@
-package listaDoble;
+package listas;
 
 import nodos.NodoDoble;
 
@@ -130,6 +130,7 @@ public class ListaDoble {
 		
 		if(isEmpty()) throw new Exception("Error: lista vacía");
 		else if (position < 0 || position >= size()) throw new Exception("Error: índice solicitado fuera de rango válido");
+		else if (position == size()-1) insertLast(dato);
 		else {
 		
 			// Creamos las variables auxiliares
