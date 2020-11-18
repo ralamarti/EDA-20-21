@@ -1,6 +1,4 @@
-package colaPrioridad;
-
-import colaEnlazada.ColaEnlazada;
+package colas;
 
 public class ColaPrioridad {
 	
@@ -8,6 +6,9 @@ public class ColaPrioridad {
 	
 	public ColaPrioridad(int numPrioridades) {
 		colas = new ColaEnlazada[numPrioridades];
+		for(int i = 0; i < numPrioridades; i++) {
+			colas[i] = new ColaEnlazada();
+		}
 	}
 	
 	/*

@@ -1,6 +1,5 @@
-package bicola;
+package colas;
 
-import colaEnlazada.*;
 import nodo.Nodo;
 
 public class Bicola extends ColaEnlazada {

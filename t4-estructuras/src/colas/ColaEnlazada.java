@@ -1,4 +1,4 @@
-package colaEnlazada;
+package colas;
 
 import nodo.Nodo;
 
