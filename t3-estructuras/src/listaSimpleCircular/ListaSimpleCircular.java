@@ -6,8 +6,6 @@ public class ListaSimpleCircular {
 
 	public Nodo acceso;
 	
-	// Constructores
-	
 	/**
 	 * Constructor de lista vacía
 	 */
@@ -25,15 +23,15 @@ public class ListaSimpleCircular {
 	}
 	
 	/*
-	 * Operaciones del TAD Lista
-	 * isEmpty(): Determina si la lista está vacía
-	 * insert(x): Inserta el elemento x entre el nodo anterior al nodo de acceso y el nodo de acceso actual, será el nuevo nodo de acceso
-	 * insertAfter(x, y): Inserta el elemento x después del nodo con dato y, será el nuevo nodo de acceso
-	 * find(x): Devuelve el nodo con el elemento x
-	 * remove(x): Elimina el nodo con elemento x
-	 * previous(x): Devuelve el nodo anterior al nodo con elemento x 
-	 * clear(): Vacía la lista
-	 * size(): Devuelve el tamaño de la lista
+	 * Operaciones del TAD
+	 * X isEmpty(): Determina si la lista está vacía
+	 * X insert(x): Inserta el elemento x entre el nodo anterior al nodo de acceso y el nodo de acceso actual, será el nuevo nodo de acceso
+	 * X insertAfter(x, y): Inserta el elemento x después del nodo con dato y, será el nuevo nodo de acceso
+	 * X find(x): Devuelve el nodo con el elemento x
+	 * X remove(x): Elimina el nodo con elemento x
+	 * X previous(x): Devuelve el nodo anterior al nodo con elemento x 
+	 * X clear(): Vacía la lista
+	 * X size(): Devuelve el tamaño de la lista
 	 * 
 	 * Nota: conservamos first() y last() para acceder de forma sencilla a los nodos de acceso y su anterior
  	 *       pero hay que tener en cuenta que ambos van a estar cambiando constantemente
@@ -41,7 +39,8 @@ public class ListaSimpleCircular {
 	 * Nota: insertHead(x), insertLast(x) no tienen sentido en una lista circular, sustituidos por insert(x);
 	 * Nota: modificado insertAfter(x, n) con posición -> insertAfter(x, y) con dato; no tiene sentido controlar posición en una lista circular
 	 * Nota: eliminado método insertAtPosition(x, n) para evitar confusión y duplicidad innecesaria
-	 * */
+	 * 
+	 **/
 	
 	/**
 	 * Método que comprueba si la lista está vacía
@@ -60,56 +59,27 @@ public class ListaSimpleCircular {
 	}
 	
 	/**
-	 * Método que devuelve el nodo de acceso actual la lista
-	 * @return El nodo de acceso de la lista
+	 * Método para comprobar el primer nodo de la lista
+	 * @return El primer nodo de la lista
+	 * @throws Exception Lanza una excepción si la lista está vacía
 	 */
-	public Nodo first() {
-		
-		// Devuelvo el nodo de acceso
-		return acceso;
-		
+	public Nodo first() throws Exception {
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else return acceso;		
 	}
-	
+		
 	/**
-	 * Método que devuelve el que es actualmente el último nodo de la lista
+	 * Método que devuelve el último nodo de la lista
 	 * @return El último nodo de la lista
+	 * @throws Exception Lanza una excepción si la lista está vacía
 	 */
-	public Nodo last() {
-		
-		// Entro a través del nodo de acceso
-		Nodo last  = acceso;
-		
-		// Busco el último (nodo que apunta a null)
-		while(last.siguiente != null) last = last.siguiente;
-		
-		// Devuelvo el último
-		return last;
-		
-	}
-	
-	/**
-	 * Método que inserta un nuevo nodo justo antes del nodo de acceso
-	 * El nodo introducido será el nuevo nodo de acceso
-	 * @param dato El elemento a insertar
-	 */
-	public void insert(Object dato) {
-		Nodo nodo = new Nodo(dato, acceso);
-		last().siguiente = nodo;
-		acceso = nodo;
-	}
-	
-	/**
-	 * Método que inserta un nuevo nodo tras otro nodo con un dato concreto
-	 * @param datoInsertar El dato a insertar
-	 * @param datoReferencia El dato tras el cual se desea insertar el nuevo dato
-	 * @throws Exception Lanza una excepción si no se encuentra el nodo de referencia
-	 */
-	public void insertAfter(Object datoInsertar, Object datoReferencia) throws Exception {
-
-		Nodo nodoReferencia = find(datoReferencia);
-		Nodo nodoInsertar = new Nodo(datoInsertar, nodoReferencia.siguiente);
-		nodoReferencia.siguiente = nodoInsertar;
-		
+	public Nodo last() throws Exception {
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else {
+			Nodo last  = acceso;
+			while(last.siguiente != acceso) last = last.siguiente;
+			return last;
+		}		
 	}
 	
 	/**
@@ -117,7 +87,6 @@ public class ListaSimpleCircular {
 	 * @return El número de elementos en la lista
 	 */
 	public int size() {
-		
 		if (isEmpty()) return 0;	
 		else {
 			int size = 1;
@@ -129,36 +98,96 @@ public class ListaSimpleCircular {
 			return size;
 		}
 	}
+	
+	/**
+	 * Método que inserta un nuevo nodo al principio de la lista	
+	 * @param dato El elemento a insertar
+	 */
+	public void insert(Object dato) {
+		if(isEmpty()) {
+			acceso = new Nodo(dato);
+			acceso.siguiente = acceso;
+		} else {
+			Nodo last  = acceso;
+			while(last.siguiente != acceso) last = last.siguiente;
+			Nodo nuevo = new Nodo(dato, acceso);
+			last.siguiente = nuevo;
+			acceso = nuevo;
+		}
+	}
+	
+	/**
+	 * Método que inserta un nuevo nodo tras otro nodo con un dato concreto
+	 * @param dato El dato a insertar
+	 * @param referencia El dato de referencia tras el cual se desea insertar un nuevo nodo
+	 * @throws Exception Lanza una excepción si la lista está vacía o si no se encuentra el dato de referencia
+	 */
+	public void insertAfter(Object dato, Object referencia) throws Exception {
+		
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else {
+		
+			Nodo nodoReferencia = find(referencia);
+	
+			// Creamos el nuevo nodo basado en el actual
+			Nodo nuevo = new Nodo(dato, nodoReferencia.siguiente);
+	
+			// Actualizamos el enlace
+			nodoReferencia.siguiente = nuevo;
 
-
+		}
+	}
+	
 	/**
 	 * Método para buscar un nodo con un dato concreto
 	 * @param dato El dato a encontrar
 	 * @return El nodo que contiene el dato concreto, null si no se encuentra el nodo
-	 * @throws Exception En caso de no encontrar el nodo, lanza excepción
+	 * @throws Exception En caso de estar la lista vacía o no encontrar el nodo, lanza excepción
 	 */
 	public Nodo find(Object dato) throws Exception {
 		
-		Nodo actual = acceso;
-		while(actual.dato != dato) {
-			if(actual.siguiente == acceso) throw new Exception("Error: nodo no encontrado");
-			else actual = actual.siguiente;
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else {
+			Nodo actual = acceso;
+			while(actual.dato != dato) {
+				if(actual.siguiente == acceso) throw new Exception("Error: nodo no encontrado");
+				else actual = actual.siguiente;
+			}
+			return actual;
 		}
-		return actual;
 		
+	}
+	
+	/**
+	 * Método para eliminar un nodo con un dato concreto
+	 * @param dato El dato a eliminar
+	 * @throws Exception En caso de estar la lista vacía o no encontrar el nodo a eliminar, lanza excepción
+	 */
+	public void remove(Object dato) throws Exception {
+		
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else if(acceso.dato == dato && acceso.siguiente == acceso) clear();
+		else if(acceso.dato == dato) {
+			last().siguiente = acceso.siguiente;
+			acceso = acceso.siguiente;
+		}
+		else {
+			Nodo anterior = previous(dato);
+			anterior.siguiente = anterior.siguiente.siguiente;
+		}
+		System.gc();		
 	}
 	
 	/**
 	 * Método para buscar el nodo anterior a otro nodo con un dato concreto
 	 * @param dato El dato cuyo anterior deseamos encontrar
 	 * @return El nodo anterior al nodo que contiene el dato concreto
-	 * @throws Exception En caso de no encontrar el nodo, lanza excepción
+	 * @throws Exception En caso de estar la lista vacía o no encontrar el nodo, lanza excepción
 	 */
 	public Nodo previous(Object dato) throws Exception {
 		
-		if(acceso.dato == dato) return last();
+		if(isEmpty()) throw new Exception("Error: lista vacía");
 		else {
-			
 			Nodo anterior = acceso;
 			Nodo actual = acceso;
 			
@@ -173,23 +202,6 @@ public class ListaSimpleCircular {
 		}		
 	}
 	
-	/**
-	 * Método para eliminar un nodo con un dato concreto
-	 * @param dato El dato a eliminar
-	 * @throws Exception En caso de no encontrar el nodo, lanza excepción
-	 */
-	public void remove(Object dato) throws Exception {
-		
-		if(acceso.dato == dato && acceso.siguiente == acceso) clear();
-		else if(acceso.dato == dato) {
-			last().siguiente = acceso.siguiente;
-			acceso = acceso.siguiente;
-		} else {
-			Nodo anterior = previous(dato);
-			anterior.siguiente = anterior.siguiente.siguiente;
-		}
 
-		System.gc();		
-	}
 	
 }

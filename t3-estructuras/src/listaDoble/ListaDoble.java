@@ -6,8 +6,6 @@ public class ListaDoble {
 
 	public NodoDoble primero;
 	
-	// Constructores
-	
 	/**
 	 * Constructor de lista vacía
 	 */
@@ -24,21 +22,22 @@ public class ListaDoble {
 	}
 	
 	/*
-	 * Operaciones del TAD ListaDoble
-	 * isEmpty(): Determina si la lista está vacía
-	 * insertHead(x): Inserta el elemento x al principio de la lista, será el nuevo primer elemento.
-	 * insertLast(x): Inserta el elemento x al final de la lista, será el último elemento.
-	 * insertAfter(x, n): Inserta el elemento x después de la posición n
-	 * find(x): Devuelve el nodo con el elemento x
-	 * remove(x): Elimina el nodo con el elemento x
-	 * first(): Devuelve el primer nodo de la lista 
-	 * last(): Devuelve el último nodo de la lista
-	 * clear(): Vacía la lista
-	 * size(): Devuelve el tamaño de la lista
+	 * Operaciones del TAD
+	 * X isEmpty(): Determina si la lista está vacía
+	 * X insertHead(x): Inserta el elemento x al principio de la lista, será el nuevo primer elemento.
+	 * X insertLast(x): Inserta el elemento x al final de la lista, será el último elemento.
+	 * X insertAfter(x, n): Inserta el elemento x después de la posición n
+	 * X find(x): Devuelve el nodo con el elemento x
+	 * X remove(x): Elimina el nodo con el elemento x
+	 * X first(): Devuelve el primer nodo de la lista 
+	 * X last(): Devuelve el último nodo de la lista
+	 * X clear(): Vacía la lista
+	 * X size(): Devuelve el tamaño de la lista
 	 * 
-	 * Nota: eliminado método insertAtPosition(x, n) para evitar confusión y duplicidad
-	 * Nota: eliminado método previous(dato) ya que podemos acceder directamente a find(dato).anterior
-	 * */
+	 * Nota: eliminado método insertAtPosition(x, n) para evitar confusión y duplicidad innecesaria
+	 * Nota: eliminado método previous(x), ya que podemos acceder al anterior mediante .anterior
+	 * 
+	 **/
 	
 	/**
 	 * Método que comprueba si la lista está vacía
@@ -57,42 +56,80 @@ public class ListaDoble {
 	}
 	
 	/**
-	 * Método para comprobar el primer nodo de la lista
-	 * @return El primer nodo de la lista
+	 * Método para comprobar el primer NodoDoble de la lista
+	 * @return El primer NodoDoble de la lista
+	 * @throws Exception Lanza una excepción si la lista está vacía
 	 */
-	public NodoDoble first() {
-		return primero;		
+	public NodoDoble first() throws Exception {
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else return primero;		
+	}
+		
+	/**
+	 * Método que devuelve el último NodoDoble de la lista
+	 * @return El último NodoDoble de la lista
+	 * @throws Exception Lanza una excepción si la lista está vacía
+	 */
+	public NodoDoble last() throws Exception {
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else {
+			NodoDoble last  = primero;
+			while(last.siguiente != null) last = last.siguiente;
+			return last;
+		}		
 	}
 	
+	/**
+	 * Método que devuelve el número de elementos en la lista
+	 * @return El número de elementos en la lista
+	 */
+	public int size() {
+		if (isEmpty()) return 0;	
+		else {
+			int size = 1;
+			NodoDoble last = primero;
+			while(last.siguiente != null){
+				size++;
+				last = last.siguiente;
+			}
+			return size;
+		}
+	}
 	
 	/**
-	 * Método que inserta un nuevo nodo al principio de la lista	
+	 * Método que inserta un nuevo NodoDoble al principio de la lista	
 	 * @param dato El elemento a insertar
 	 */
 	public void insertHead(Object dato) {
-		NodoDoble nodo = new NodoDoble(null, dato, primero);
-		primero = nodo;
+		NodoDoble NodoDoble = new NodoDoble(null, dato, primero);
+		primero = NodoDoble;
 	}
 	
 	/**
-	 * Método que inserta un nuevo nodo al final de la lista
+	 * Método que inserta un nuevo NodoDoble al final de la lista
 	 * @param dato El dato a insertar
 	 */
 	public void insertLast(Object dato) {
-		NodoDoble last = last();
-		last.siguiente = new NodoDoble(last, dato, null);
+		if(isEmpty()) insertHead(dato); 
+		else {
+			NodoDoble last  = primero;
+			while(last.siguiente != null) last = last.siguiente;
+			last.siguiente = new NodoDoble(last, dato, null);
+		}
 	}	
 	
 	/**
-	 * Método que inserta un nuevo nodo tras una posición concreta
+	 * Método que inserta un nuevo NodoDoble tras una posición concreta
+	 * Nota: se considera 0 como el índice de inicio, en otras palabras, la posición (6) hará referencia al 7º elemento de la lista:
+	 * 		 (0) --> (1) --> (2) --> (3) --> (4) --> (5) --> {(6)}
 	 * @param dato El dato a insertar
 	 * @param position La posición tras la cual se desea insertar el nuevo dato
-	 * @throws Exception Lanza una excepción si la posición solicitada está fuera de rango
+	 * @throws Exception Lanza una excepción si la lista está vacía o si la posición solicitada está fuera de rango
 	 */
 	public void insertAfter(Object dato, int position) throws Exception {
-
-		if (position < 0 || position >= size()) throw new Exception("Error: índice solicitado fuera de rango válido");
-		else if (position == 0)	insertHead(dato);
+		
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else if (position < 0 || position >= size()) throw new Exception("Error: índice solicitado fuera de rango válido");
 		else {
 		
 			// Creamos las variables auxiliares
@@ -101,7 +138,7 @@ public class ListaDoble {
 			// Iteramos hasta llegar a la posición deseada (lista empieza en index 0)
 			for (int i = 0; i < position; i++) actual = actual.siguiente;
 	
-			// Creamos el nuevo nodo basado en el actual
+			// Creamos el nuevo NodoDoble basado en el actual
 			NodoDoble nuevo = new NodoDoble(actual, dato, actual.siguiente);
 	
 			// Actualizamos los enlaces
@@ -112,76 +149,44 @@ public class ListaDoble {
 	}
 	
 	/**
-	 * Método que devuelve el número de elementos en la lista
-	 * @return El número de elementos en la lista
-	 */
-	public int size() {
-		
-		if (isEmpty()) return 0;	
-		else {
-			int size = 1;
-			NodoDoble last  = primero;
-			while(last.siguiente != null){
-				size++;
-				last = last.siguiente;
-			}
-			return size;
-		}
-	}
-
-
-	/**
-	 * Método que devuelve el último nodo de la lista
-	 * @return El último nodo de la lista
-	 */
-	public NodoDoble last() {
-		
-		// Entro a través del primero
-		NodoDoble last  = primero;
-		
-		// Busco el último (nodo que apunta a null)
-		while(last.siguiente != null) last = last.siguiente;
-		
-		// Devuelvo el último
-		return last;
-		
-	}
-	
-	/**
-	 * Método para buscar un nodo con un dato concreto
+	 * Método para buscar un NodoDoble con un dato concreto
 	 * @param dato El dato a encontrar
-	 * @return El nodo que contiene el dato concreto, null si no se encuentra el nodo
-	 * @throws Exception En caso de no encontrar el nodo, lanza excepción
+	 * @return El NodoDoble que contiene el dato concreto, null si no se encuentra el NodoDoble
+	 * @throws Exception En caso de estar la lista vacía o no encontrar el NodoDoble, lanza excepción
 	 */
 	public NodoDoble find(Object dato) throws Exception {
 		
-		NodoDoble actual = primero;
-		while(actual.dato != dato) {
-			if(actual.siguiente == null) throw new Exception("Error: nodo no encontrado");
-			else actual = actual.siguiente;
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else {
+			NodoDoble actual = primero;
+			while(actual.dato != dato) {
+				if(actual.siguiente == null) throw new Exception("Error: nodo no encontrado");
+				else actual = actual.siguiente;
+			}
+			return actual;
 		}
-		return actual;
 		
 	}
 	
 	/**
-	 * Método para eliminar un nodo con un dato concreto
+	 * Método para eliminar un NodoDoble con un dato concreto
 	 * @param dato El dato a eliminar
-	 * @throws Exception En caso de no encontrar el nodo, lanza excepción
+	 * @throws Exception En caso de estar la lista vacía o no encontrar el NodoDoble a eliminar, lanza excepción
 	 */
 	public void remove(Object dato) throws Exception {
-		
-		if(primero.dato == dato) {
+		if(isEmpty()) throw new Exception("Error: lista vacía");
+		else if(primero.dato == dato && primero.siguiente == null) clear();
+		else if(primero.dato == dato) {
 			primero = primero.siguiente;
 			primero.anterior = null;
-		} else {
-			NodoDoble nodo = find(dato);
-			nodo.siguiente.anterior = nodo.anterior;
-			nodo.anterior.siguiente = nodo.siguiente;
-
 		}
-		System.gc();
-		
+		else {
+			NodoDoble eliminar = find(dato);
+			eliminar.anterior.siguiente = eliminar.siguiente;
+			eliminar.siguiente.anterior = eliminar.anterior;
+		}
+		System.gc();		
 	}
+	
 	
 }

@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Scanner;
+
 import clases.*;
 import listas.Lista;
 
@@ -28,6 +30,9 @@ public class Principal {
 		//listaCompra.insertLast(leche);
 		
 		listaCompra.insertAtPosition(leche, 2);
+		
+		Scanner entrada = new Scanner(System.in);
+		entrada.nextLine().toCharArray();
 		
 	}
 
