@@ -101,8 +101,12 @@ public class ListaDoble {
 	 * @param dato El elemento a insertar
 	 */
 	public void insertHead(Object dato) {
-		NodoDoble NodoDoble = new NodoDoble(null, dato, primero);
-		primero = NodoDoble;
+		if(isEmpty()) primero = new NodoDoble(dato);
+		else {
+			NodoDoble nuevo = new NodoDoble(null, dato, primero);
+			primero.anterior = nuevo; 
+			primero = nuevo;
+		}
 	}
 	
 	/**
